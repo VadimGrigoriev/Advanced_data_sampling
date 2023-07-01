@@ -1,6 +1,9 @@
 -- 1. Название и продолжительность самого длительного трека.
-SELECT MAX(music_time)
-  FROM music;
+SELECT music_name, music_time
+  FROM music
+ WHERE music_time = 
+       (SELECT MAX(music_time)
+         FROM music);
   
 -- 2. Название треков, продолжительность которых не менее 3,5 минут (210 секунд).
 SELECT music_name, music_time
@@ -23,6 +26,7 @@ SELECT musician_name
 -- 5. Название треков, которые содержат слово «мой» или «my».
 SELECT music_name
   FROM music
- WHERE music_name LIKE '%my'
-    OR music_name LIKE '%my%'
-    OR music_name LIKE 'my%';
+ WHERE music_name LIKE '% my'
+    OR music_name LIKE '% my %'
+    OR music_name LIKE 'my %'
+    OR music_name LIKE 'my';
