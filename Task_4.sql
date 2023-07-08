@@ -1,16 +1,14 @@
 -- 1. Названия альбомов, в которых присутствуют исполнители более чем одного жанра.
-SELECT album_name, COUNT(styling_name)
+SELECT DISTINCT album_name
   FROM album AS a
        JOIN album_musician AS am
          ON a.album_id = am.album_id 
        JOIN musician AS m
          ON am.musician_id = m.musician_id 
        JOIN musician_style AS ms
-         ON m.musician_id = ms.musician_id 
-       JOIN styling AS s
-         ON ms.styling_id = s.styling_id
- GROUP BY album_name
-HAVING COUNT(styling_name) > 1;
+         ON m.musician_id = ms.musician_id
+ GROUP BY album_name, ms.musician_id
+HAVING COUNT(styling_id) > 1;
 
 -- 2. Наименования треков, которые не входят в сборники.
 SELECT music_name
